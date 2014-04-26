@@ -1,0 +1,7 @@
+{
+    "name": "highlight",
+    "version": "1.0.0",
+    "dependencies": {
+        "grunt-contrib-uglify": "~0.2.2"
+    }
+}
