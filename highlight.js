@@ -57,7 +57,7 @@ var Highlight;
         rule: '(\'[\\s\\S]*?\'|\"[\\s\\S]*?\")',
         callback: function(str) {
             // Some js string has html tags
-            return str.replace('<', '&lt;');
+            return str.replace(/</g, '&lt;');
         }
     }, {
         name: 'kwd', // keyword
