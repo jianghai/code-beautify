@@ -17,7 +17,7 @@ var Highlight;
      */
     Highlight = function(el) {
         this.el = el;
-        this.source = el.textContent;
+        this.source = el.text;
         this.lang = el.getAttribute('lang') || 'js';
 
         // '\s' contains '\n', so just use ' '
@@ -39,7 +39,7 @@ var Highlight;
     // html
     Highlight.html = [{
         name: 'tag', // markup tag
-        rule: '(<\\/?[\\w\\d]+|>)',
+        rule: '(<[\\/!]?[\\w\\d]+|>)',
         callback: function(str) {
             return str.replace('<', '&lt;');
         }
@@ -51,7 +51,11 @@ var Highlight;
     // javascript
     Highlight.js = [{
         name: 'com', // comment
-        rule: '(\\/\\/.*|\\/\\*[\\s\\S]*?\\*\\/)'
+        rule: '(\\/\\/.*|\\/\\*[\\s\\S]*?\\*\\/)',
+        callback: function(str) {
+            // Some js comment has html tags
+            return str.replace(/</g, '&lt;');
+        }
     }, {
         name: 'str', // string
         rule: '(\'[\\s\\S]*?\'|\"[\\s\\S]*?\")',
@@ -114,7 +118,21 @@ var Highlight;
      * Here is the last step, show it in the page.
      */
     Highlight.prototype.render = function() {
-        this.el.innerHTML = this.convert();
+        this.getBox().innerHTML = this.convert();
+    };
+
+
+    /**
+     * Some code include html string and user should use script tag instead of normal
+     * html tag, this method check if this.el is script element or not, and return the
+     * right container.
+     */
+    Highlight.prototype.getBox = function() {
+        var pre = document.createElement('pre');
+        pre.className = this.el.className;
+        this.el.parentNode.insertBefore(pre, this.el);
+        this.el.parentNode.removeChild(this.el);
+        return pre;
     };
 
 })();

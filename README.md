@@ -6,20 +6,24 @@ Highlight is an module which make your web pages text(mainly the language code) 
 
 - Any text
 - Easy to use with module, such as requirejs, seajs
-- lightweight, core code just less than 100 lines, you can extend it according to your requirements
+- Lightweight, core code just less than 100 lines, you can extend it according to your requirements
+- Backward compatibility, IE6+, Chrome, FF, Safari.
 
 ### Basic usage
 
+html
 ```html
-<code class="highlight" lang="js">
+<!--js is default, you need not to set attribute lang-->
+<script type="text" class="highlight" lang="js">
 (function(){
     var x = y = 1;
 })();
 console.log(y);
 console.log(x);
-</code>
+</script>
 ```
 
+javascript
 ```js
 var el = document.querySelector('highlight');
 new Highlight(el);
