@@ -123,9 +123,7 @@ var Highlight;
 
 
     /**
-     * Some code include html string and user should use script tag instead of normal
-     * html tag, this method check if this.el is script element or not, and return the
-     * right container.
+     * Replace the script element with pre.
      */
     Highlight.prototype.getBox = function() {
         var pre = document.createElement('pre');
