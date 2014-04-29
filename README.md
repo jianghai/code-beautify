@@ -1,5 +1,7 @@
 Highlight is an module which make your web pages text(mainly the language code) highlight by the default or your custom rules.
 
+![highlight](https://raw.githubusercontent.com/jianghai/highlight/master/screenshot.png)
+
 ### Features
 
 - Any text
