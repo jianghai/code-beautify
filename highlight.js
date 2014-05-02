@@ -8,92 +8,88 @@ var highlight;
 
 (function() {
 
-    highlight = {
+    var el;
+    var lang;
+    var source;
+
+    /**
+     * Here is the last step, show it in the page.
+     */
+    var render = function() {
+        getBox().innerHTML = convert(lang);
+    };
 
 
-        /**
-         * Pass an html element which you want to highlight.
-         * Example:
-         *     var el = document.getElementById('myCode');
-         *     highlight.init(el);
-         */
-        init: function(el) {
-            this.el = el;
-            this.lang = el.getAttribute('lang') || 'javascript';
-
-            this.source = el.value || el.innerText;
-
-            // '\s' contains '\n', so just use ' '
-            this.source = this.source.replace(/ /g, '\u00a0');
-
-            // remove start and end '\n'
-            this.source = this.source.replace(/^\s+|\s+$/g, '');
-
-            this.render();
-        },
+    /**
+     * Replace the script element with pre.
+     */
+    var getBox = function() {
+        var pre = document.createElement('pre');
+        pre.className = el.className;
+        el.parentNode.insertBefore(pre, el);
+        el.parentNode.removeChild(el);
+        return pre;
+    };
 
 
-        /**
-         * Here is the last step, show it in the page.
-         */
-        render: function() {
-            this.getBox().innerHTML = this.convert(this.lang);
-        },
+    /**
+     * This is the key action that convert normal code string with all kinds of
+     * syntax rules.
+     */
+    var convert = function(lang) {
+        var rules = highlight.rules[lang];
+        var reg = new RegExp(getReg(lang), 'g');
 
-
-        /**
-         * Replace the script element with pre.
-         */
-        getBox: function() {
-            var pre = document.createElement('pre');
-            pre.className = this.el.className;
-            this.el.parentNode.insertBefore(pre, this.el);
-            this.el.parentNode.removeChild(this.el);
-            return pre;
-        },
-
-
-        /**
-         * This is the key action that convert normal code string with all kinds of
-         * syntax rules.
-         */
-        convert: function(lang) {
-            var rules = this.rules[lang];
-            var reg = new RegExp(this.getReg(lang), 'g');
-
-            this.source = this.source.replace(reg, function() {
-                var args = arguments;
-                var len = args.length - 1;
-                var i = 1;
-                for (; i < len; i++) {
-                    if (args[i] && rules[i - 1]) {
-                        if (rules[i - 1].callback) {
-                            args[i] = rules[i - 1].callback.call(null, args[i])
-                        }
-                        return '<span class="' + rules[i - 1].name + '">' + args[i] + '</span>';
+        source = source.replace(reg, function() {
+            var args = arguments;
+            var len = args.length - 1;
+            var i = 1;
+            for (; i < len; i++) {
+                if (args[i] && rules[i - 1]) {
+                    if (rules[i - 1].callback) {
+                        args[i] = rules[i - 1].callback.call(null, args[i])
                     }
+                    return '<span class="' + rules[i - 1].name + '">' + args[i] + '</span>';
                 }
-            });
-            return this.source.replace(/\n/g, '<br>');
-        },
-
-
-        /**
-         * Get all regexp rules of this lang.
-         */
-        getReg: function(lang) {
-            if (this.getReg[lang]) return this.getReg[lang];
-            var reg = [];
-            var rules = this.rules[lang];
-            for (var i = 0; i < rules.length; i++) {
-                reg.push(rules[i].rule);
             }
-            reg = reg.join('|');
+        });
+        return source.replace(/\n/g, '<br>');
+    };
 
-            this.getReg[lang] = reg;
 
-            return reg;
+    /**
+     * Get all regexp rules of this lang.
+     */
+    var getReg = function(lang) {
+        if (getReg[lang]) return getReg[lang];
+        var reg = [];
+        var rules = highlight.rules[lang];
+        for (var i = 0; i < rules.length; i++) {
+            reg.push(rules[i].rule);
         }
+        reg = reg.join('|');
+
+        getReg[lang] = reg;
+
+        return reg;
+    };
+
+
+    /**
+     * Pass an html element which you want to highlight.
+     * Example:
+     *     var el = document.getElementById('myCode');
+     *     highlight.init(el);
+     */
+    highlight = function(node) {
+        el = node;
+        lang = el.getAttribute('lang') || 'javascript';
+        source = el.value || el.innerText;
+
+        // '\s' contains '\n', so just use ' '
+        source = source.replace(/ /g, '\u00a0');
+
+        render();
     };
 
 
@@ -143,4 +139,13 @@ var highlight;
         // Another language
     };
 
+
+    /**
+     * AMD enabled
+     */
+    if (typeof define === 'function' && define.amd) {
+        define(function() {
+            return highlight;
+        });
+    }
 })();

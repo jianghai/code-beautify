@@ -26,7 +26,7 @@ console.log(x);
 javascript
 ```js
 var el = document.querySelector('highlight');
-highlight.init(el);
+highlight(el);
 ```
 
 The css was defined by yourself, here is my theme.
