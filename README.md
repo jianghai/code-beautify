@@ -13,25 +13,28 @@ Highlight is an module which make your web pages text(mainly the language code) 
 
 html
 ```html
-<!--js is default, you need not to set attribute lang-->
-<script type="text" class="highlight" lang="js">
+<!--javascript is default, you need not to set attribute lang-->
+<textarea class="highlight" lang="javascript">
 (function(){
     var x = y = 1;
 })();
 console.log(y);
 console.log(x);
-</script>
+</textarea>
 ```
 
 javascript
 ```js
 var el = document.querySelector('highlight');
-new Highlight(el);
+highlight.init(el);
 ```
 
 The css was defined by yourself, here is my theme.
 ```css
 .highlight {
+    font: 0.9em/1.6 Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
+    border: 10px solid #dadada;
+    border-radius: 5px;
     line-height: 1.5;
     background-color: #FAF7ED;
     padding: 10px;

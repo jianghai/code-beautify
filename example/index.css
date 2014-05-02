@@ -1,0 +1,23 @@
+.highlight {
+    font: 0.9em/1.6 Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
+    border: 10px solid #dadada;
+    border-radius: 5px;
+    line-height: 1.5;
+    background-color: #FAF7ED;
+    padding: 10px;
+}
+.highlight .str {
+    color: #E56363;
+}
+.highlight .com {
+    color: #ACACAC;
+}
+.highlight .kwd {
+    color: #B38100;
+}
+.highlight .opt {
+    color: #B38100;
+}
+.highlight .tag {
+    color: #689C00;
+}
