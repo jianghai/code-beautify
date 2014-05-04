@@ -4,8 +4,6 @@ Available via the MIT or new BSD license.
 see: http://github.com/jianghai/highlight for details
 */
 
-var highlight;
-
 (function() {
 
     var el;
@@ -81,7 +79,7 @@ var highlight;
      *     var el = document.getElementById('myCode');
      *     highlight.init(el);
      */
-    highlight = function(node) {
+    var highlight = function(node) {
         el = node;
         lang = el.getAttribute('lang') || 'javascript';
         source = el.value || el.innerText;
@@ -141,11 +139,14 @@ var highlight;
 
 
     /**
-     * AMD enabled
+     * Environment check
      */
     if (typeof define === 'function' && define.amd) {
+        // AMD enabled
         define(function() {
             return highlight;
         });
+    } else {
+        this.highlight = highlight;
     }
-})();
+}).call(this);
