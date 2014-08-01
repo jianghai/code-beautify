@@ -5,13 +5,16 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         uglify: {
             options: {
-                banner: '/*\n<%= pkg.name %>.min.js v<%= pkg.version%>\n'
-                    + 'Available via the MIT or new BSD license.\n'
-                    + 'see: http://github.com/jianghai/<%= pkg.name %> for details.\n*/\n'
+                banner: 
+                    '/**\n' +
+                    ' * <%= pkg.name %>.min.js v<%= pkg.version%>\n' +
+                    ' * Available via the MIT or new BSD license.\n' +
+                    ' * see: http://github.com/jianghai/<%= pkg.name %> for details.\n' +
+                    ' */\n'
             },
             build: {
-                src: 'highlight.js',
-                dest: 'highlight.min.js'
+                src: '<%= pkg.name %>.js',
+                dest: '<%= pkg.name %>.min.js'
             }
         }
     });

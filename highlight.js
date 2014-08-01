@@ -128,10 +128,19 @@ see: http://github.com/jianghai/highlight for details
             }
         }, {
             name: 'kwd', // keyword
-            rule: '\\b(break|case|catch|continue|debugger|default|delete|do|else|finally|for|function|if|in|instanceof|new|return|switch|this|throw|try|typeof|var|void|while|with)\\b'
+            rule: '\\b(function|break|case|catch|continue|debugger|default|delete|do|else|finally|for|function|if|in|instanceof|new|return|switch|this|throw|try|typeof|var|void|while|with)\\b'
+        }, {
+            name: 'kc', // key constant
+            rule: '\\b(true|false|undefined|null|Infinity)\\b'
+        }, {
+            name: 'nb', // built-in object
+            rule: '\\b(Array|console|Date|document|Function|isFinite|isNaN|Math|Object|parseInt|parseFloat|RegExp|string|window)\\b'
         }, {
             name: 'opt', // operator
             rule: '(\\+|-|\\*|\\/|%|<|>|=|==|===|!=|!==|!|&&|\\|\\||&|\\|)'
+        }, {
+            name: 'num', // number
+            rule: '(\\d+)'
         }]
 
         // Another language
@@ -143,10 +152,11 @@ see: http://github.com/jianghai/highlight for details
      */
     if (typeof define === 'function' && define.amd) {
         // AMD enabled
-        define(function() {
+        define('highlight', [], function() {
             return highlight;
         });
-    } else {
-        this.highlight = highlight;
     }
+
+    this.highlight = highlight;
+
 }).call(this);

@@ -1,7 +1,5 @@
 Highlight is an module which make your web pages text(mainly the language code) highlight by the default or your custom rules.
 
-![highlight](https://raw.githubusercontent.com/jianghai/highlight/master/screenshot.png)
-
 ### Features
 
 - Any text
@@ -14,13 +12,13 @@ Highlight is an module which make your web pages text(mainly the language code) 
 html
 ```html
 <!--javascript is default, you need not to set attribute lang-->
-<textarea class="highlight" lang="javascript">
+<script type="text" class="highlight">
 (function(){
     var x = y = 1;
 })();
 console.log(y);
 console.log(x);
-</textarea>
+</script>
 ```
 
 javascript
@@ -29,29 +27,48 @@ var el = document.querySelector('highlight');
 highlight(el);
 ```
 
-The css was defined by yourself, here is my theme.
+The css was defined by yourself, here is github theme.
 ```css
 .highlight {
-    font: 0.9em/1.6 Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
-    border: 10px solid #dadada;
-    border-radius: 5px;
-    line-height: 1.5;
-    background-color: #FAF7ED;
-    padding: 10px;
+    padding: 5px 10px;
+    font: 12px/18px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    overflow: auto;
 }
 .highlight .str {
-    color: #E56363;
+    color: #dd1144;
 }
 .highlight .com {
-    color: #ACACAC;
+    color: #999988;
+     font-style: italic; 
 }
 .highlight .kwd {
-    color: #B38100;
+    font-weight: bold;
+}
+.highlight .kc {
+    font-weight: bold;
+}
+.highlight .nb {
+    color: #0086b3;
 }
 .highlight .opt {
     color: #B38100;
 }
+.highlight .num {
+    color: #009999;
+}
+.highlight .reg {
+    color: #009926;
+}
+.highlight .lit {
+    color: #B90000;
+}
 .highlight .tag {
-    color: #689C00;
+    color: navy;
+}
+.highlight .atn {
+    color: #E2A70E;
+}
+.highlight .atv {
+    color: #333;
 }
 ```
