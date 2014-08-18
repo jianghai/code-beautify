@@ -84,6 +84,10 @@ see: http://github.com/jianghai/highlight for details
         lang = el.getAttribute('lang') || 'javascript';
         source = el.value || el.innerText;
 
+        // Remove \n in the start
+        source = source.replace(/^\n/g, '');
+
+        // Replace whitespace with entity
         // '\s' contains '\n', so just use ' '
         source = source.replace(/ /g, '\u00a0');
 
