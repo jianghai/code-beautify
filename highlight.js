@@ -5,38 +5,23 @@ see: http://github.com/jianghai/highlight for details
 */
 
 (function() {
-
-    var el;
-    var lang;
     var source;
 
-    /**
-     * Here is the last step, show it in the page.
-     */
-    var render = function() {
-        getBox().innerHTML = convert(lang);
-    };
-
 
     /**
-     * Replace the script element with pre.
-     */
-    var getBox = function() {
-        var pre = document.createElement('pre');
-        pre.className = el.className;
-        el.parentNode.insertBefore(pre, el);
-        el.parentNode.removeChild(el);
-        return pre;
-    };
-
-
-    /**
-     * This is the key action that convert normal code string with all kinds of
+     * Parse normal code string new "marked" string by all kinds of
      * syntax rules.
      */
-    var convert = function(lang) {
+    var parse = function(source, lang) {
         var rules = highlight.rules[lang];
         var reg = new RegExp(getReg(lang), 'g');
+
+        // Remove \n in the start
+        source = source.replace(/^\n/g, '');
+
+        // Replace whitespace with entity
+        // '\s' contains '\n', so just use ' '
+        source = source.replace(/ /g, '\u00a0');
 
         source = source.replace(reg, function() {
             var args = arguments;
@@ -74,24 +59,10 @@ see: http://github.com/jianghai/highlight for details
 
 
     /**
-     * Pass an html element which you want to highlight.
-     * Example:
-     *     var el = document.getElementById('myCode');
-     *     highlight.init(el);
+     * Outer interface
      */
-    var highlight = function(node) {
-        el = node;
-        lang = el.getAttribute('lang') || 'javascript';
-        source = el.value || el.innerText;
-
-        // Remove \n in the start
-        source = source.replace(/^\n/g, '');
-
-        // Replace whitespace with entity
-        // '\s' contains '\n', so just use ' '
-        source = source.replace(/ /g, '\u00a0');
-
-        render();
+    var highlight = function(source, lang) {
+        return parse(source, lang);
     };
 
 
@@ -103,9 +74,28 @@ see: http://github.com/jianghai/highlight for details
      */
     highlight.rules = {
 
-        // markup
         markup: [{
-            name: 'tag', // markup tag
+            name: 'com',
+            rule: '(<!--[\\s\\S]*?-->)',
+            callback: function(str) {
+                return str.replace(/</g, '&lt;');
+            }
+        }, {
+            name: 'tag',
+            rule: '(<[\\/!]?[\\w-]+|>)',
+            callback: function(str) {
+                return str.replace('<', '&lt;');
+            }
+        }, {
+            name: 'attr',
+            rule: '\\b([\\w-:]+[=>])'
+        }, {
+            name: 'str', // attribute value
+            rule: '(\"[\\s\\S]*?\")'
+        }],
+
+        css: [{
+            name: 'tag',
             rule: '(<[\\/!]?[\\w\\d]+|>)',
             callback: function(str) {
                 return str.replace('<', '&lt;');
@@ -115,7 +105,6 @@ see: http://github.com/jianghai/highlight for details
             rule: '(\"[\\s\\S]*?\")'
         }],
 
-        // javascript
         javascript: [{
             name: 'com', // comment
             rule: '(\\/\\/.*|\\/\\*[\\s\\S]*?\\*\\/)',
