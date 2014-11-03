@@ -5,8 +5,6 @@ see: http://github.com/jianghai/highlight for details
 */
 
 (function() {
-    var source;
-
 
     /**
      * Parse normal code string new "marked" string by all kinds of
@@ -105,7 +103,7 @@ see: http://github.com/jianghai/highlight for details
             rule: '(\"[\\s\\S]*?\")'
         }],
 
-        javascript: [{
+        js: [{
             name: 'com', // comment
             rule: '(\\/\\/.*|\\/\\*[\\s\\S]*?\\*\\/)',
             callback: function(str) {
