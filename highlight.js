@@ -130,6 +130,9 @@ see: http://github.com/jianghai/highlight for details
       name: 'kc', // key constant
       rule: '\\b(true|false|undefined|null|Infinity)\\b'
     }, {
+      name: 'in', // build-in keyword
+      rule: '\\b(window|require|console)\\b'
+    }, {
       name: 'nb', // built-in object
       rule: '\\b(Array|console|Date|document|Function|isFinite|isNaN|Math|Object|parseInt|parseFloat|RegExp|string|window)\\b'
     }, {
@@ -137,7 +140,7 @@ see: http://github.com/jianghai/highlight for details
       rule: '(\\+|-|\\*|\\/|%|<|>|=|==|===|!=|!==|!|&&|\\|\\||&|\\|)'
     }, {
       name: 'num', // number
-      rule: '(\\d+)'
+      rule: '\\b(\\d+)\\b'
     }]
 
     // Another language
