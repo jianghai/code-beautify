@@ -1,11 +1,19 @@
 {
-    "name": "highlight",
-    "version": "1.0.0",
-    "devDependencies": {
-        "express": "3.4.0",
-        "grunt": "~0.4.2",
-        "grunt-contrib-uglify": "~0.2.2",
-        "grunt-contrib-copy": "~0.5.0",
-        "load-grunt-tasks": "~0.3.0"
-    }
+  "name": "highlight",
+  "version": "0.0.1",
+  "description": "highlight is an module which parse your string to new \"marked\" string by the default or your custom rules.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jianghai/highlight.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jianghai/highlight/issues"
+  },
+  "homepage": "https://github.com/jianghai/highlight#readme"
 }
