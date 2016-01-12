@@ -1,6 +1,6 @@
 {
   "name": "highlight",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "highlight is an module which parse your string to new \"marked\" string by the default or your custom rules.",
   "main": "src/index.js",
   "scripts": {
