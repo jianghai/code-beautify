@@ -1,12 +1,12 @@
 ### Install
 
 ```sh
-$ npm install @janghai/highlight
+$ npm install code-beautify
 ```
 ### Usage
 
 ```js
-import highlight from 'highlight'
+import beautify from 'code-beautify'
 
-highlight('const a = 1', 'js')
+beautify('const a = 1', 'js')
 ```
