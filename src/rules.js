@@ -40,7 +40,7 @@ module.exports = {
   }, {
     // jsx
     name: 'tag',
-    rule: '(<[\\/!]?[\\w-]+|>)',
+    rule: '(<[\\/!]?[\\w-\\.]+|>)',
     callback: function(str) {
       return str.replace('<', '&lt;');
     }
@@ -56,7 +56,7 @@ module.exports = {
     }
   }, {
     name: 'kwd', // keyword
-    rule: '\\b(import|from|export|function|break|case|catch|continue|debugger|default|delete|do|else|finally|for|function|if|in|instanceof|new|return|switch|this|throw|try|typeof|var|void|while|with)\\b'
+    rule: '\\b(import|from|export|function|break|case|catch|continue|debugger|default|delete|do|else|finally|for|function|if|in|instanceof|new|return|switch|this|throw|try|typeof|var|let|const|void|while|with)\\b'
   }, {
     name: 'kc', // key constant
     rule: '\\b(true|false|undefined|null|Infinity)\\b'
