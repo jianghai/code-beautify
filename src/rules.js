@@ -69,5 +69,18 @@ module.exports = {
   }, {
     name: 'num', // number
     rule: '(\\d+)'
+  }],
+
+  sh: [{
+    name: 'com', // comment
+    rule: '(#.*)'
+  }],
+
+  java: [{
+    name: 'com', // comment
+    rule: '(\\/\\/.*|\\/\\*[\\s\\S]*?\\*\\/)'
+  }, {
+    name: 'kwd', // keyword
+    rule: '\\b(public|class|extends|protected|void|throws)\\b'
   }]
 }

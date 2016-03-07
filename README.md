@@ -8,5 +8,5 @@ $ npm install code-beautify
 ```js
 import beautify from 'code-beautify'
 
-beautify('const a = 1', 'js')
+beautify('const a = 1', 'js') // <span class="kwd">const</span> a <span class="opt">=</span> <span class="num">1</span>
 ```
